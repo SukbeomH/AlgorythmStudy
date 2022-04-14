@@ -21,8 +21,9 @@ function solutionF(n) {
 			return 1;
 		}
 		return (
-			(fibonacci(m - 1) % 1234567) +
-			(fibonacci(m - 2) % 1234567)
+			((fibonacci(m - 1) % 1234567) +
+				(fibonacci(m - 2) % 1234567)) %
+			1234567
 		);
 	}
 	return fibonacci(n);
