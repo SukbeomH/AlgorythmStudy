@@ -2,6 +2,57 @@
 
 function solution(board, moves) {
 	var answer = 0;
+	const bucket = [];
+
+	moves.forEach((move) => {
+		// break 구현
+		let stop = false;
+		board.forEach((location) => {
+			const doll = location[move - 1];
+			// if문으로 조건이 맞춰지면 공회전하도록 한다
+			if (stop === false) {
+				if (doll !== 0) {
+					location[move - 1] = 0;
+					if (bucket[bucket.length - 1] === doll) {
+						bucket.push(doll);
+						answer += 2;
+					} else {
+						bucket.push(doll);
+					}
+					// break; 메소드 안에서는 break를 지원하지 않는다
+					stop = true;
+				}
+			}
+		});
+	});
+
+	return answer;
+}
+
+//
+function solutionF(board, moves) {
+	var answer = 0;
+	const bucket = [];
+
+	for (let i = 0; i < moves.length; i++) {
+		for (let j = 0; j < board.length; j++) {
+			const doll = board[j][moves[i] - 1];
+			if (doll !== 0) {
+				board[j][moves[i - 1]] = 0;
+				// 통에 인형을 넣기 전, 통의 마지막에 있는 인형의 종류를 파악한다
+				if (bucket[bucket.length - 1] === doll) {
+					// 둘이 같다면 없애주고 통에 넣지 않는다
+					bucket.splice(bucket.length - 1, 1);
+					// 삭제된 숫자 증가
+					answer += 2;
+					break;
+				} else {
+					bucket.push(doll);
+					break;
+				}
+			}
+		}
+	}
 	return answer;
 }
 
