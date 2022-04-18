@@ -1,26 +1,28 @@
 // 크레인 인형뽑기 게임
 
 function solution(board, moves) {
-	var answer = 0;
+	let answer = 0;
 	const bucket = [];
 
 	moves.forEach((move) => {
-		// break 구현
-		let stop = false;
+		// 반복문을 실행하지 않게 하는 변수
+		// ( check가 false 일 때만 forEach 실행 )
+		let check = false;
+
 		board.forEach((location) => {
 			const doll = location[move - 1];
-			// if문으로 조건이 맞춰지면 공회전하도록 한다
-			if (stop === false) {
+
+			if (check === false) {
 				if (doll !== 0) {
 					location[move - 1] = 0;
+
 					if (bucket[bucket.length - 1] === doll) {
-						bucket.push(doll);
 						answer += 2;
+						bucket.splice(bucket.length - 1, 1);
 					} else {
 						bucket.push(doll);
 					}
-					// break; 메소드 안에서는 break를 지원하지 않는다
-					stop = true;
+					check = true;
 				}
 			}
 		});
