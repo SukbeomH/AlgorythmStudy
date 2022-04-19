@@ -6,7 +6,10 @@
 // 제한사항
 // n은 1 이상 100,000,000 이하인 자연수입니다.
 
-function solution(n) {
+// 3진법으로 변환
+n = n.toString(3);
+
+function solutionF(n) {
 	const n3 = parseInt(
 		String(parseInt(String(n), 3))
 			.split("")
@@ -16,4 +19,22 @@ function solution(n) {
 	);
 
 	return n3;
+}
+
+function solutionFOR(n) {
+	// 3진법으로 변환
+	n = n.toString(3);
+
+	let reverse = "";
+	for (let i = n.length - 1; i >= 0; i--) {
+		reverse += n[i];
+	}
+	// 3진법으로 변환된 데이터를 10진법으로 변환
+	return parseInt(reverse, 3);
+}
+
+function solutionREVERSE(n) {
+	n = n.toString(3).split("").reverse().join("");
+
+	return parseInt(n, 3);
 }

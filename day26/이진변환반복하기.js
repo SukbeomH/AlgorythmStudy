@@ -12,3 +12,43 @@
 // 제한사항
 // s의 길이는 1 이상 150,000 이하입니다.
 // s에는 '1'이 최소 하나 이상 포함되어 있습니다.
+
+function solutionFOR_WHILE(s) {
+	let count = 0;
+	let remove = 0;
+
+	while (s !== "1") {
+		count++;
+
+		let temp = "";
+		for (let i = 0; i < s.length; i++) {
+			if (s[i] === "0") {
+				remove++;
+				continue;
+			}
+			temp += s[i];
+		}
+
+		s = temp.length;
+		s = s.toString(2);
+	}
+	return [count, remove];
+}
+
+// 재귀함수
+function solution(s) {
+	let [count, remove] = [0, 0];
+
+	function recursion(s) {
+		if (s === "1") {
+			return [count, remove];
+		}
+
+		remove += s.split("").filter((el) => el === "0").length;
+		s = s.split("").filter((el) => el !== "0").length;
+		count++;
+
+		return recursion(s.toString(2));
+	}
+	return recursion(s);
+}
