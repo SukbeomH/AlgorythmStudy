@@ -33,3 +33,14 @@ function solution(n, words) {
 	});
 	return [(fail % n) + 1, Math.ceil(fail / n)];
 }
+
+//
+
+function solution(n, words) {
+	return words.reduce(
+		(acc, cur) => {
+			return acc;
+		},
+		[0, 0]
+	);
+}
