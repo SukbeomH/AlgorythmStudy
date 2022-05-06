@@ -44,3 +44,53 @@ function solution(n, words) {
 		[0, 0]
 	);
 }
+
+//
+//
+function solution(n, words) {
+	for (let i = 1; i < words.length; i++) {
+		const player = (i % n) + 1;
+		const turn = Math.floor(i / n) + 1;
+
+		// 이전 사람이 말한 단어의 가장 뒷부분 (마지막 글자)
+		const prevWord = words[i - 1][words[i - 1].length - 1];
+		// 현재 사람이 말한 단어의 가장 앞부분 (첫글자)
+		const firstWord = words[i][0];
+
+		if (
+			prevWord !== firstWord ||
+			words.indexOf(words[i]) !== i
+		) {
+			return [player, turn];
+		}
+	}
+	return [0, 0];
+}
+
+//
+//
+//
+function solution(n, words) {
+	let stop = false;
+	return words.slice(1).reduce(
+		(acc, cur, i) => {
+			const prev = words[i];
+
+			i++;
+			const player = (i % n) + 1;
+			const turn = Math.floor(i / n) + 1;
+
+			if (stop === false) {
+				if (
+					cur[0] !== prev[prev.length - 1] ||
+					words.indexOf(cur) !== i
+				) {
+					stop = true;
+					return [player, turn];
+				}
+			}
+			return acc;
+		},
+		[0, 0]
+	);
+}
